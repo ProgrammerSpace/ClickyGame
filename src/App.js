@@ -30,6 +30,11 @@ class App extends Component {
     }
   }
 
+  // Before component unmount
+  componentWillUnmount() {
+    localStorage.setItem("topscore", this.state.topscore);
+  }
+
   // Shuffle images array
   shuffleTiles = (array) => {
     array.sort(function () {
