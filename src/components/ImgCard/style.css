@@ -8,4 +8,8 @@
   .card > .tile {
     height: 100%;
   }
+
+  .card > .tile:hover {
+    box-shadow: 0 6px 12px #999, 0 6px 12px #999;
+  }
   
