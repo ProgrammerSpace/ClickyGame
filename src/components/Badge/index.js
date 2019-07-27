@@ -4,7 +4,7 @@ import { Badge } from 'reactstrap';
 const Score = (props) => {
     return (
         <div>
-            <h1 className="float-right mr-3 mt-2"><Badge color="primary">Score {props.score}</Badge></h1>
+            <h1 className="float-right mr-3 mt-2"><Badge color="primary">Score {props.score} | Top Score {props.topscore}</Badge></h1>
         </div>
     );
 }

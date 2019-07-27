@@ -14,9 +14,29 @@ class App extends Component {
     topscore: 0
   };
 
+  componentDidMount() {
+    let ts = localStorage.getItem("topscore");
+    console.log(ts);
+    if (ts !== null) {
+      console.log("hit not null!");
+      this.setState({
+        topscore: ts
+      });
+    } else {
+      this.setState({
+        topscore: 0
+      });
+    }
+  }
+
+  shuffleTiles = (array) => {
+    array.sort(function () {
+      return 0.5 - Math.random();
+    });
+  }
+
   handleClick = event => {
     event.preventDefault();
-    console.log(event.target.getAttribute('data-clicked'));
     let clicked = event.target.getAttribute('data-clicked');
     if (clicked === 'true') {
       if (this.state.score > this.state.topscore) {
@@ -25,6 +45,8 @@ class App extends Component {
           score: 0
         });
       }
+      localStorage.setItem("topscore", this.state.topscore);
+      alert("Oh no!! Why don't you try again");
       document.location.reload(true);
     } else {
       event.target.setAttribute('data-clicked', true);
@@ -32,6 +54,7 @@ class App extends Component {
         score: this.state.score + 1
       });
     }
+    this.shuffleTiles(this.state.images);
   };
 
   render() {
