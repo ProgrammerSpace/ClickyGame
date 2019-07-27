@@ -31,6 +31,7 @@ class App extends Component {
   }
 
   // Before component unmount
+  // Page reload doesn't actually unmount components, componentWillUnmount is not going to hit before reload.
   componentWillUnmount() {
     localStorage.setItem("topscore", this.state.topscore);
   }
