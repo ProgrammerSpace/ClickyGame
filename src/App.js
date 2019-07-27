@@ -8,13 +8,15 @@ import './App.css';
 class App extends Component {
 
   state = {
-    images
+    images,
+    score: 0,
+    topscore: 0
   };
 
   render() {
     return (
       <>
-        <Badge />
+        <Badge score={this.state.score} topscore={this.state.score} />
         <Jumbo />
         {this.state.images.map(image => (
           <Card
