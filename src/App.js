@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container } from 'reactstrap';
 import Badge from './components/Badge';
 import Jumbo from './components/Jumbotron';
 import Card from './components/ImgCard'
@@ -18,14 +19,16 @@ class App extends Component {
       <>
         <Badge score={this.state.score} topscore={this.state.score} />
         <Jumbo />
-        {this.state.images.map(image => (
-          <Card
-            id={image.id}
-            key={image.id}
-            name={image.name}
-            src={image.image}
-          />
-        ))}
+        <Container>
+          {this.state.images.map(image => (
+            <Card
+              id={image.id}
+              key={image.id}
+              name={image.name}
+              src={image.image}
+            />
+          ))}
+        </Container>
         {console.log(this.state.images)}
       </>
     );
