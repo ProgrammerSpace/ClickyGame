@@ -14,6 +14,7 @@ class App extends Component {
     topscore: 0
   };
 
+  // Set top score from local storage
   componentDidMount() {
     let ts = localStorage.getItem("topscore");
     console.log(ts);
@@ -29,29 +30,32 @@ class App extends Component {
     }
   }
 
+  // Shuffle images array
   shuffleTiles = (array) => {
     array.sort(function () {
       return 0.5 - Math.random();
     });
   }
 
+  // When you click on tile
   handleClick = event => {
     event.preventDefault();
     let clicked = event.target.getAttribute('data-clicked');
     if (clicked === 'true') {
-      if (this.state.score > this.state.topscore) {
-        this.setState({
-          topscore: this.state.score,
-          score: 0
-        });
-      }
       localStorage.setItem("topscore", this.state.topscore);
       alert("Oh no!! Why don't you try again");
       document.location.reload(true);
     } else {
       event.target.setAttribute('data-clicked', true);
+      let score = this.state.score;
+      let topscore = this.state.topscore;
+      score += 1;
+      if (score > topscore) {
+        topscore = score;
+      }
       this.setState({
-        score: this.state.score + 1
+        score: score,
+        topscore: topscore
       });
     }
     this.shuffleTiles(this.state.images);
