@@ -14,10 +14,30 @@ class App extends Component {
     topscore: 0
   };
 
+  handleClick = event => {
+    event.preventDefault();
+    console.log(event.target.getAttribute('data-clicked'));
+    let clicked = event.target.getAttribute('data-clicked');
+    if (clicked === 'true') {
+      if (this.state.score > this.state.topscore) {
+        this.setState({
+          topscore: this.state.score,
+          score: 0
+        });
+      }
+      document.location.reload(true);
+    } else {
+      event.target.setAttribute('data-clicked', true);
+      this.setState({
+        score: this.state.score + 1
+      });
+    }
+  };
+
   render() {
     return (
       <>
-        <Badge score={this.state.score} topscore={this.state.score} />
+        <Badge score={this.state.score} topscore={this.state.topscore} />
         <Jumbo />
         <Container>
           {this.state.images.map(image => (
@@ -26,6 +46,7 @@ class App extends Component {
               key={image.id}
               name={image.name}
               src={image.image}
+              handleClick={this.handleClick}
             />
           ))}
         </Container>
